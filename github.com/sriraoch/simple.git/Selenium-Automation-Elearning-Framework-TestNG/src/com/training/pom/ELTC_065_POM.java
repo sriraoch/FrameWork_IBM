@@ -7,10 +7,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class ELTC_034_POM {
+public class ELTC_065_POM {
 	private WebDriver driver;
 
-	public ELTC_034_POM(WebDriver driver) {// PageFactory Constructor
+	public ELTC_065_POM (WebDriver driver) {// PageFactory Constructor
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}

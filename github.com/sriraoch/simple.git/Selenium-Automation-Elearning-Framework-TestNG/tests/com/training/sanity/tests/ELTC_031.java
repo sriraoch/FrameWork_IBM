@@ -13,8 +13,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.training.bean.ELTC_007Bean;
 import com.training.generics.ScreenShot;
 import com.training.pom.ELTC_031_POM;
 import com.training.pom.HomePOM;

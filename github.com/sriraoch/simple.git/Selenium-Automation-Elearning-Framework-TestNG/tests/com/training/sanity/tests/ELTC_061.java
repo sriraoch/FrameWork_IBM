@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -13,18 +12,17 @@ import org.testng.annotations.Test;
 
 import com.training.dataproviders.LoginDataProviders;
 import com.training.generics.ScreenShot;
-import com.training.pom.ELTC_063_POM;
-import com.training.pom.LoginPOM;
+import com.training.pom.ELTC_061_POM;
+//import com.training.pom.ELTC_072POM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class ELTC_063 {
+public class ELTC_061 {
 	private WebDriver driver;
 	private String baseUrl;
-	private LoginPOM loginPOM;
-	private ELTC_063_POM eltc_063_POM;
 	private static Properties properties;
 	private ScreenShot screenShot;
+	private ELTC_061_POM eltc_061_POM;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException {
@@ -36,38 +34,33 @@ public class ELTC_063 {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
-		loginPOM = new LoginPOM(driver);
-		eltc_063_POM= new ELTC_063_POM(driver);
+		eltc_061_POM = new ELTC_061_POM(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver);
 		// open the browser
 		driver.get(baseUrl);
-		loginPOM.sendUserName(properties.getProperty("adminUserName"));// Enter Username
-		loginPOM.sendPassword(properties.getProperty("admiPassword"));// Enter Password
-		loginPOM.clickLoginBtn();// Click on Login Button
 	}
 
 	@AfterMethod
 	public void tearDown() throws Exception {
-		driver.quit();
+		// driver.quit();
 	}
 
 	@Test(dataProvider = "excel-inputs", dataProviderClass = LoginDataProviders.class)
-	public void loginDBTest(String fieldsName, String firstName, String lastName, String eMail, String phone,String login, String password) {
-		eltc_063_POM.clickOnAdminTab();
-		eltc_063_POM.clickOnAddNewUser();
-		screenShot.captureScreenShot("After Clicking on Add user button");
-		eltc_063_POM.enterFirstName(firstName);
-		eltc_063_POM.enterLastName(lastName);
-		eltc_063_POM.enterEmail(eMail);
-		eltc_063_POM.enterUserName(login);
-		eltc_063_POM.enterPassword(password);
-		eltc_063_POM.clickOnProfileDropDwon();
-		eltc_063_POM.clickOnAddUser();
-		String expetedMessage= "The user has been added:" + " "+ firstName+" "+ lastName;
-		String actualMesage= eltc_063_POM.getAddUserMessage();
-		Assert.assertEquals(actualMesage, expetedMessage);
-
+	public void loginDBTest(String courseName, String testName, String question, String t1) {
+		eltc_061_POM.sendUserName("shashi");
+		eltc_061_POM.sendPassword("goodLuck99");
+		eltc_061_POM.clickLoginBtn();
+		eltc_061_POM.clickCreateACourse();
+		eltc_061_POM.sendCourseName(courseName);
+		eltc_061_POM.clickCreateThisCourse();
+		eltc_061_POM.clickTests();
+		eltc_061_POM.clickCreateANewCourse();
+		eltc_061_POM.sendTestName(testName);
+		eltc_061_POM.clickProceedToQuestions();
+		eltc_061_POM.clickMultipleChoice();
+		eltc_061_POM.sendQuestion(question);
+		eltc_061_POM.sendIFrame1(t1);
 	}
 
 }
